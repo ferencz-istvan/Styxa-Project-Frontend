@@ -2,28 +2,38 @@
   <OriginTable
     :data="POIs"
     :headerList="headers"
-    @add="openModal"
+    @add="addPOI"
     @edit="changePOI"
-    @deleteEmit="deletePOI"
+    @deleteEmit="openDeleteModal"
   />
-  <BaseModal :isOpen="isModalOpen" @close="closeModal" />
+  <DeleteModal
+    :isOpen="isModalOpen"
+    :idToDelete="idToDelete"
+    :data="singlePOI"
+    @close="closeModal"
+    @delete-element="deletePOI"
+  />
   <button @click="addPOI">Add Point Of Interest</button>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import OriginTable from '../components/OriginTable.vue'
-import BaseModal from '../components/BaseModal.vue'
+import DeleteModal from '../components/DeleteModal.vue'
 import { usePOIStore } from '@/stores/POIStore'
 import type { POI } from '@/types/POI'
 
 const POIStore = usePOIStore()
 
 const POIs = computed(() => POIStore.POIs)
+const singlePOI = computed(() => POIStore.singlePOI)
 const headers = ['Name', 'Description']
 const isModalOpen = ref(false)
+const idToDelete = ref(0)
 
-function openModal() {
+function openDeleteModal(id: number) {
+  idToDelete.value = id
+  POIStore.getPOI(id)
   isModalOpen.value = true
 }
 
@@ -51,7 +61,7 @@ function changePOI(id: number) {
   POIStore.changePoint(id, newPOI)
 }
 
-function deletePOI(id: Number) {
+function deletePOI(id: number) {
   POIStore.deletePoint(id)
 }
 

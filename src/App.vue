@@ -9,11 +9,13 @@
         <button @click="isSidebar = !isSidebar"><span class="mdi mdi-menu own-icon"></span></button>
       </div>
       <div><span class="mdi mdi-database-arrow-down own-icon"></span></div>
-      <div><span class="mdi mdi-alien own-icon"></span></div>
+      <div><img class="cursor-pointer" src="../../city-pointer.svg" width="30" /></div>
       <div><h1>Alap fejléc</h1></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div>
+        <img class="cursor-pointer" src="../../styxa-white.png" width="45px" />
+      </div>
+      <!-- <div></div>
+      <div></div> -->
     </div>
     <div v-if="isShowStickyHeader" class="sticky-header">
       <div>
@@ -22,9 +24,7 @@
       <div><span class="mdi mdi-database-arrow-down own-icon"></span></div>
       <div><span class="mdi mdi-alien own-icon"></span></div>
       <div><h1>Fejléc</h1></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div><img class="cursor-pointer" src="../../styxa-blue.png" width="55px" /></div>
     </div>
     <div class="container">
       <div v-if="isSidebar" class="sidebar">
@@ -85,7 +85,7 @@ const valueForMargin = computed(() => {
   display: block;
   width: 100vw;
   min-height: 300vh;
-  background-color: pink;
+  background-color: Lavender;
 }
 .container {
   display: flex;
@@ -96,7 +96,7 @@ const valueForMargin = computed(() => {
   align-items: center;
   justify-content: center;
   height: 60px;
-  background-color: cadetblue;
+  background-color: DarkCyan;
   font-weight: 900;
   font-size: large;
   color: white;
@@ -107,6 +107,8 @@ const valueForMargin = computed(() => {
   align-items: first baseline;
 }
 .sticky-header {
+  font-weight: 700;
+  font-size: large;
   display: grid;
   grid-template-columns: 60px 60px 60px 1fr 180px;
   margin: 10px 10px 10px 10px;
@@ -120,7 +122,7 @@ const valueForMargin = computed(() => {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(4px);
-  transition: 2s all ease;
+  /*transition: 2s all ease;*/
   /*filter: blur(4px);*/
   /*filter: drop-shadow(16px 16px 20px red) invert(75%);*/
 }

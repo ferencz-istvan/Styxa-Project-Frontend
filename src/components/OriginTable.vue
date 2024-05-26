@@ -72,9 +72,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import BaseButton from './BaseButton.vue'
 import type { POI } from '@/types/POI'
+import type { City } from '@/types/city'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 interface Props {
@@ -96,17 +97,11 @@ function addEmit() {
   emit('add')
 }
 
-function editEmit(id) {
+function editEmit(id: number) {
   emit('edit', id)
 }
 
-function deleteEmit(id) {
+function deleteEmit(id: number) {
   emit('deleteEmit', id)
 }
-
-onMounted(() => {
-  console.log('hello')
-  console.log(cities)
-  console.log(Object.keys(cities.value))
-})
 </script>
