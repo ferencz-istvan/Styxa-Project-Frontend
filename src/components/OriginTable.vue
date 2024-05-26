@@ -90,12 +90,6 @@ const headers = props.headerList.map((head) => {
   return { key: head.toLowerCase(), label: head }
 })
 
-/*   [
-  { key: 'name', label: 'Name' },
-  { key: 'description', label: 'Description' },
-  { key: 'population', label: 'Population' }
-] */
-
 const cities = computed(() => props.data)
 
 function addEmit() {
