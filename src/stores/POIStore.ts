@@ -41,8 +41,8 @@ export const usePOIStore = defineStore({
         })
         const data = await response.json()
         if (data) {
-          this.POIs.push(data)
-          /* console.log(data) */
+          /* this.POIs.push(data) */
+          this.getPOIs()
         }
       } catch (error) {
         console.error('Error adding point', error)

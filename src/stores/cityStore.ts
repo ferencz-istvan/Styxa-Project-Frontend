@@ -44,8 +44,7 @@ export const useCityStore = defineStore({
         const data = await response.json()
         // const response = await this.cityService.addCity(city)
         if (data) {
-          this.cities.push(data)
-          console.log(data)
+          this.getCities()
         }
       } catch (error) {
         console.error('Error adding city', error)

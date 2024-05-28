@@ -52,16 +52,17 @@ const baseDataForFormModal = {
   description: '',
   city_id: 0
 }
-let dataForFormModal = structuredClone(baseDataForFormModal)
+let dataForFormModal: POI
+dataForFormModal = structuredClone(baseDataForFormModal)
 
 const isDeleteModalOpen = ref(false)
 const isAddModalOpen = ref(false)
 const isChangeModalOpen = ref(false)
 const idToDelete = ref(0)
 
-function openDeleteModal(id: number) {
+async function openDeleteModal(id: number) {
   idToDelete.value = id
-  POIStore.getPOI(id)
+  await POIStore.getPOI(id)
   isDeleteModalOpen.value = true
 }
 function closeDeleteModal() {
@@ -75,8 +76,18 @@ function closeAddModal() {
   isAddModalOpen.value = false
 }
 
-function openChangeModal(id: number) {
-  dataForFormModal.id = id
+async function openChangeModal(id: number) {
+  await POIStore.getPOI(id)
+  if (POIStore.singlePOI === null) {
+    return
+  }
+
+  //dataForFormModal = structuredClone(POIStore.singlePOI as POI)
+  dataForFormModal.id = POIStore.singlePOI.id
+  dataForFormModal.name = POIStore.singlePOI.name
+  dataForFormModal.description = POIStore.singlePOI.description
+  dataForFormModal.city_id = POIStore.singlePOI.city_id
+
   isChangeModalOpen.value = true
 }
 function closeChangeModal() {
@@ -92,7 +103,7 @@ function addPOI(data: POI) {
   }
   //opcionális hibakeresés
   POIStore.addPOI(newPOI)
-  location.reload() //not the best, but currently we dont know the id the new pont yet
+  //location.reload() //not the best, but currently we dont know the id the new pont yet
 }
 
 function changePOI(data: POI) {
@@ -111,5 +122,8 @@ function deletePOI(id: number) {
 
 onMounted(async () => {
   await POIStore.getPOIs()
+})
+onMounted(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 </script>

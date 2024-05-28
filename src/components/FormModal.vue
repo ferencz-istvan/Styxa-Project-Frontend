@@ -47,7 +47,12 @@
                   </DialogTitle>
                   <form>
                     <div v-for="(value, key) in thisData || {}" :key="key">
-                      <label v-if="key != 'id' && key != 'city_id'" :for="key">{{ key }}</label>
+                      <label
+                        v-if="key != 'id' && key != 'city_id'"
+                        :for="key"
+                        :placeholder="value"
+                        >{{ key }}</label
+                      >
                       <input
                         v-if="key != 'id' && key != 'city_id'"
                         v-model="(objectForEmit as POI | City)[key]"
@@ -58,14 +63,12 @@
                     </div>
                     <div v-if="props.typeString == 'POI'">
                       <label for="cities">Select the location of the point:</label>
-                      <select v-model="selectedId" name="cities" id="cities">
+                      <select v-model="selectedIdForCity" name="cities" id="cities">
                         <option v-for="city in cityStore.cities" :key="city.id" :value="city.id">
                           {{ city.name }}
                         </option>
                       </select>
                     </div>
-                    <!-- :type="typeof value"  -->
-                    {{ objectForEmit?.name }}
                   </form>
                   <div class="mt-2"></div>
                 </div>
@@ -115,23 +118,45 @@ const emit = defineEmits(['close', 'sendData'])
 const open = computed(() => props.isOpen)
 const thisData = computed(() => props.data)
 let objectForEmit: City | POI | null
+objectForEmit = props.data
 const cityStore = useCityStore()
-const selectedId = ref(0)
+const selectedIdForCity = ref(0)
 
 function closeModal() {
   emit('close')
 }
 
-function sendData() {
-  if (Object.keys(objectForEmit || {}).includes('city_id')) {
-    ;(objectForEmit as POI).city_id = selectedId.value
+//function sendData() {
+/*  if (objectForEmit === null) return */
+/* if (Object.keys(objectForEmit || {}).includes('city_id')) {
+    ;(objectForEmit as POI).city_id = selectedIdForCity.value
   }
-  /*  console.log(selectedId.value)
-  console.log(objectForEmit) */
+   if (typeof objectForEmit?.id === 'number') {
+    objectForEmit.id = props.data?.id
+  } else return  */
+/*   ObjectForEmit.id = props.data?.id */
+/* 
+  console.log('++++++++++++++++++++++++++++++++++++++')
+  console.log(objectForEmit)
+
   emit('sendData', objectForEmit)
   emit('close')
 }
+ */
+function sendData() {
+  if (!objectForEmit) return
 
+  if (Object.keys(objectForEmit).includes('city_id')) {
+    ;(objectForEmit as POI).city_id = selectedIdForCity.value
+  }
+
+  if (typeof objectForEmit.id === 'number') {
+    objectForEmit.id = props.data?.id || 0
+  }
+
+  emit('sendData', objectForEmit)
+  emit('close')
+}
 onMounted(async () => {
   objectForEmit = structuredClone(props.data)
   if (props.typeString === 'POI') {
