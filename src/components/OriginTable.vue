@@ -5,7 +5,7 @@
         <h1 class="text-base font-semibold leading-6 text-gray-900 p-4">Cities</h1>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <BaseButton title="Add City" type="primary" @onClick="addEmit" />
+        <BaseButton title="Add" type="primary" @onClick="addEmit" />
       </div>
     </div>
     <div id="table-content" class="mt-6 flow-root">

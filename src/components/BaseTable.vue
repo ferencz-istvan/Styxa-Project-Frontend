@@ -115,11 +115,4 @@ function changeCity(id: number) {
 function deleteCity(id: Number) {
   cityStore.deleteCity(id)
 }
-
-/* import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiTrashCanOutline } from '@mdi/js'
-import { mdiFileDocumentEditOutline } from '@mdi/js'
-
-const path1 = mdiFileDocumentEditOutline
-const path2 = mdiTrashCanOutline */
 </script>

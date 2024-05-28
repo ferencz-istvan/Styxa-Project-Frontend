@@ -1,11 +1,12 @@
 <template>
   <button :class="buttonStyle" class="px-4 py-2 rounded-lg border" @click="onClick">
-    {{ title }}
+    <span class="flex"><PlusIcon class="size-6 text-white cursor-pointer" />{{ title }}</span>
   </button>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { PlusIcon } from '@heroicons/vue/24/solid'
 
 interface Props {
   title: string

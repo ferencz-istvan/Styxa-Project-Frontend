@@ -4,7 +4,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 
 <template>
   <main>
-    <img src="../../public/city-pointer.svg" width="300" />
+    <img src="../../city-pointer.svg" width="300" />
     <svg
       width="500px"
       xmlns="http://www.w3.org/2000/svg"
