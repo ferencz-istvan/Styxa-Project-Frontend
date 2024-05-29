@@ -1,8 +1,16 @@
 <template>
-  <div class="px-4 sm:px-6 lg:px-8 bg-red-700">
-    <div id="table-header" class="sm:flex sm:items-center bg-slate-300">
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div id="table-header" class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900 p-4">Cities</h1>
+        <h1
+          v-if="props.headerList.length <= 2"
+          class="text-base font-semibold leading-6 text-gray-900 p-4"
+        >
+          Cities
+        </h1>
+        <h1 v-else class="text-base font-semibold leading-6 text-gray-900 p-4">
+          Points of interests
+        </h1>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
         <BaseButton title="Add" type="primary" @onClick="addEmit" />
@@ -23,41 +31,55 @@
                   >
                     {{ header.label }}
                   </th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Edit
+                  </th>
+                  <th
+                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Delete
+                  </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="city in cities" :key="city.id">
+                <tr v-for="item in entities" :key="item.id as number">
                   <td
                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
-                    <RouterLink
-                      :to="{
-                        name: 'details',
-                        params: {
-                          id: city.id,
-                          name: city.name
-                        }
-                      }"
-                      >{{ city.name }}</RouterLink
-                    >
+                    <div v-if="props.headerList.length > 2">
+                      <RouterLink
+                        :to="{
+                          name: 'details',
+                          params: {
+                            id: item.id as number,
+                            name: item.name as string
+                          }
+                        }"
+                        >{{ item.name }}</RouterLink
+                      >
+                    </div>
+                    <div v-else>{{ item.name }}</div>
                   </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {{ city.description }}
+                  <td class="max-w-md truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    {{ item.description }}
                   </td>
-                  <!--  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {{ city.population }}
-                  </td> -->
+                  <td
+                    v-if="props.headerList.length > 2"
+                    class="max-w-md truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                  >
+                    {{ item.city_name }}
+                  </td>
                   <td
                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    @click="editEmit(city.id)"
+                    @click="editEmit(item.id as number)"
                   >
                     <PencilSquareIcon class="size-6 text-blue-500 cursor-pointer" />
                   </td>
                   <td
                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                    @click="deleteEmit(city.id)"
+                    @click="deleteEmit(item.id as number)"
                   >
                     <TrashIcon class="size-6 text-blue-500 cursor-pointer" />
                   </td>
@@ -71,15 +93,13 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="T extends Record<string, unknown>">
 import { computed } from 'vue'
 import BaseButton from './BaseButton.vue'
-import type { POI } from '@/types/POI'
-import type { City } from '@/types/city'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 interface Props {
-  data: POI[] | City[]
+  data: Array<T>
   headerList: string[]
 }
 
@@ -91,7 +111,7 @@ const headers = props.headerList.map((head) => {
   return { key: head.toLowerCase(), label: head }
 })
 
-const cities = computed(() => props.data)
+const entities = computed(() => props.data)
 
 function addEmit() {
   emit('add')

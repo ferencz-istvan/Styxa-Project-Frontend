@@ -31,7 +31,7 @@
             >
               <div>
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky-500"
                 >
                   <span><TrashIcon class="size-8 text-black cursor-pointer" /></span>
                 </div>
@@ -39,10 +39,19 @@
                   <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900"
                     >Are you sure you want to delete the following item?</DialogTitle
                   >
-                  <div class="mt-2">
-                    <ul v-for="(value, key) in data || {}" :key="key">
-                      <li>{{ key }}:{{ value }}</li>
-                    </ul>
+                  <div class="flex flex-row">
+                    <div class="w-5/12">
+                      <img class="cursor-pointer w-44 p-5" src="../../stop.svg" />
+                    </div>
+                    <div class="w-7/12 mt-2 flex flex-col align-center">
+                      <div
+                        v-for="(value, key) in data || {}"
+                        :key="key"
+                        class="max-h-12 text-clip overflow-hidden"
+                      >
+                        <span class="font-semibold">{{ key }}:</span> {{ value }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -37,12 +37,15 @@ import OriginTable from '../components/OriginTable.vue'
 import DeleteModal from '../components/DeleteModal.vue'
 import FormModal from '../components/FormModal.vue'
 import { useCityStore } from '@/stores/cityStore'
+import { usePOIStore } from '@/stores/POIStore'
 import type { City } from '@/types/city'
 
 const cityStore = useCityStore()
 
 const cities = computed(() => cityStore.cities)
 const singleCity = computed(() => cityStore.singleCity)
+
+const POIStore = usePOIStore()
 
 const headers = ['Name', 'Description']
 const type = 'city'
@@ -114,8 +117,15 @@ function changeCity(data: City) {
   cityStore.changeCity(data.id, newCity)
 }
 
-function deleteCity(id: number) {
-  cityStore.deleteCity(id)
+async function deleteCity(id: number) {
+  await POIStore.getPointsOfCity(id)
+  if (POIStore.pointsOfCity.length === 0) {
+    cityStore.deleteCity(id)
+  } else {
+    window.alert('You cannot delete this city!!! \n  Points of interests depend on it !!!')
+  }
+
+  /*  */
 }
 
 onMounted(async () => {

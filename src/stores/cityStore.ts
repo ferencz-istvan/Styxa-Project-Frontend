@@ -77,7 +77,6 @@ export const useCityStore = defineStore({
         const response = await fetch(`http://localhost:3000/cities/${id}`, {
           method: 'DELETE'
         })
-        /* console.log(response) */
         if (response.status === 204) {
           const foundedCity = this.cities.find((cityInArray) => cityInArray.id === id)
           if (foundedCity) {

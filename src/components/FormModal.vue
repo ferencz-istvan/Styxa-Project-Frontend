@@ -31,11 +31,11 @@
             >
               <div>
                 <div
-                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
+                  class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-cyan-100"
                 >
                   <span><PencilIcon class="size-8 text-black cursor-pointer" /></span>
                 </div>
-                <div class="mt-3 text-center sm:mt-5">
+                <div class="flex flex-column mt-3 text-center sm:mt-5">
                   <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900"
                     ><span v-if="(thisData as POI | City).id === 0"
                       >Add a new
@@ -48,34 +48,46 @@
                   <form>
                     <div v-for="(value, key) in thisData || {}" :key="key">
                       <label
+                        class="m-3"
                         v-if="key != 'id' && key != 'city_id'"
                         :for="key"
                         :placeholder="value"
-                        >{{ key }}</label
+                        >{{ key }}:</label
                       >
                       <input
+                        class="m-2 p-2 bg-cyan-100"
+                        style="width: auto"
                         v-if="key != 'id' && key != 'city_id'"
                         v-model="(objectForEmit as POI | City)[key]"
                         :id="key"
                         :name="key"
                         :type="typeof value"
-                      /><br />
+                      />
                     </div>
-                    <div v-if="props.typeString == 'POI'">
-                      <label for="cities">Select the location of the point:</label>
-                      <select v-model="selectedIdForCity" name="cities" id="cities">
+                    <div v-if="props.typeString === 'POI'">
+                      <label for="cities">location of the point:</label>
+                      <select
+                        v-model="selectedIdForCity"
+                        name="cities"
+                        id="cities"
+                        class="p-2 m-2 bg-cyan-100"
+                      >
                         <option v-for="city in cityStore.cities" :key="city.id" :value="city.id">
                           {{ city.name }}
                         </option>
                       </select>
                     </div>
                   </form>
+                  <div class="p-1 m-2 flex self-center">
+                    <img src="../../factory.svg" width="120" />
+                  </div>
+
                   <div class="mt-2"></div>
                 </div>
               </div>
               <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                 <button
-                  @click="sendData"
+                  @click="verifyData"
                   type="button"
                   class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
                 >
@@ -99,7 +111,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import type { POI } from '@/types/POI'
 import type { City } from '@/types/city'
@@ -126,23 +138,22 @@ function closeModal() {
   emit('close')
 }
 
-//function sendData() {
-/*  if (objectForEmit === null) return */
-/* if (Object.keys(objectForEmit || {}).includes('city_id')) {
-    ;(objectForEmit as POI).city_id = selectedIdForCity.value
+watch(
+  () => props.isOpen,
+  () => {
+    objectForEmit = structuredClone(props.data)
   }
-   if (typeof objectForEmit?.id === 'number') {
-    objectForEmit.id = props.data?.id
-  } else return  */
-/*   ObjectForEmit.id = props.data?.id */
-/* 
-  console.log('++++++++++++++++++++++++++++++++++++++')
-  console.log(objectForEmit)
+)
 
-  emit('sendData', objectForEmit)
-  emit('close')
+function verifyData() {
+  if (!objectForEmit) return
+  if (objectForEmit.name === '') {
+    window.alert('The name input field cannot be empty')
+  } else {
+    sendData()
+  }
 }
- */
+
 function sendData() {
   if (!objectForEmit) return
 
@@ -158,7 +169,6 @@ function sendData() {
   emit('close')
 }
 onMounted(async () => {
-  objectForEmit = structuredClone(props.data)
   if (props.typeString === 'POI') {
     await cityStore.getCities()
   }

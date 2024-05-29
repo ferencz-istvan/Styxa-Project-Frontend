@@ -44,7 +44,7 @@ const POIStore = usePOIStore()
 const POIs = computed(() => POIStore.POIs)
 const singlePOI = computed(() => POIStore.singlePOI)
 
-const headers = ['Name', 'Description']
+const headers = ['Name', 'Description', 'City']
 const type = 'POI'
 const baseDataForFormModal = {
   id: 0,
@@ -121,7 +121,7 @@ function deletePOI(id: number) {
 }
 
 onMounted(async () => {
-  await POIStore.getPOIs()
+  await POIStore.getExtendedPOIs()
 })
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
