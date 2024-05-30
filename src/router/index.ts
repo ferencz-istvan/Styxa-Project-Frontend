@@ -32,6 +32,11 @@ const router = createRouter({
       path: '/points',
       name: 'points',
       component: () => import('../views/POIView.vue')
+    },
+    {
+      path: '/maps',
+      name: 'maps',
+      component: () => import('../views/MapsView.vue')
     }
   ]
 })

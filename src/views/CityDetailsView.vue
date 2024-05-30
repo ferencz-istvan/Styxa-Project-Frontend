@@ -33,6 +33,9 @@
         </div>
       </div>
     </div>
+    <!--  <div v-if="">
+<iframe :src="maproute" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div> -->
   </div>
 </template>
 
@@ -40,12 +43,15 @@
 import { onMounted } from 'vue'
 import { useCityStore } from '@/stores/cityStore'
 import { usePOIStore } from '@/stores/POIStore'
+import { useCityMapStore } from '@/stores/mapStore'
 import { computed } from 'vue'
 
 const cityStore = useCityStore()
 const singleCity = computed(() => cityStore.singleCity)
 const POIStore = usePOIStore()
 const pointsOfCity = computed(() => POIStore.pointsOfCity)
+const cityMapStore = useCityMapStore()
+/* const isExistMap = computed */
 
 interface CityProps {
   id: string
@@ -57,6 +63,10 @@ const myProp = defineProps<CityProps>()
 onMounted(async () => {
   await cityStore.getCity(myProp.id)
   await POIStore.getPointsOfCity(Number(myProp.id))
+})
+
+onMounted(async () => {
+  await cityMapStore.getCityMaps()
 })
 
 onMounted(() => {

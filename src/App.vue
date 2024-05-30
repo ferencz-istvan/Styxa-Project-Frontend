@@ -129,7 +129,11 @@ const plans = [
   {
     name: 'About me',
     route: '/about'
-  }
+  } /* ,
+  {
+    name: 'Add map',
+    route: '/maps'
+  } */
 ]
 
 const selected = ref(plans.find((element) => element.route === router.currentRoute.value.path))
