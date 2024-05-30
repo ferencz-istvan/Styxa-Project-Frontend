@@ -33,32 +33,50 @@
                 <div
                   class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
                 >
-                  <span>Ikon</span>
+                  <span><LinkIcon class="size-8 text-black cursor-pointer" /></span>
                 </div>
                 <div class="mt-3 text-center sm:mt-5">
                   <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900"
-                    >Payment successful</DialogTitle
+                    >Which repository do you want to open?</DialogTitle
                   >
                   <div class="mt-2">
                     <p class="text-sm text-gray-500">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius aliquam
-                      laudantium explicabo pariatur iste dolorem animi vitae error totam. At
-                      sapiente aliquam accusamus facere veritatis.
+                      Please select the repository whose code you are interested in.
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                <button
-                  type="button"
-                  class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-                  @click="closeModal"
+              <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-3 sm:gap-3">
+                <a
+                  href="https://github.com/ferencz-istvan/Styxa-Project-Frontend"
+                  target="_blank"
+                  class="sm:col-start-3"
                 >
-                  Deactivate
-                </button>
+                  <button
+                    type="button"
+                    class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    @click="closeModal"
+                  >
+                    <p>Frontend</p>
+                    >
+                  </button></a
+                >
+                <a
+                  href="https://github.com/ferencz-istvan/Styxa-Project-Backend"
+                  target="_blank"
+                  class="sm:col-start-2"
+                >
+                  <button
+                    type="button"
+                    class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    @click="closeModal"
+                  >
+                    Backend
+                  </button></a
+                >
                 <button
                   type="button"
-                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+                  class="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
                   @click="closeModal"
                   ref="cancelButtonRef"
                 >
@@ -76,6 +94,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { LinkIcon } from '@heroicons/vue/24/solid'
 
 interface Props {
   isOpen: boolean

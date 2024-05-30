@@ -10,9 +10,19 @@
           <Bars3Icon class="size-8 text-black cursor-pointer hover:drop-shadow-lg" />
         </button>
       </div>
-      <div><img src="../public/github.svg" class="w-8 hover:drop-shadow-lg" /></div>
-      <div><img class="cursor-pointer w-10 hover:drop-shadow-lg" src="../../favicon.svg" /></div>
-      <div><h1>Cities with points of interests</h1></div>
+      <div>
+        <img
+          @click="openGitModal"
+          src="../public/github.svg"
+          class="cursor-pointer w-8 hover:drop-shadow-lg"
+        />
+      </div>
+      <div>
+        <RouterLink to="/"
+          ><img class="w-10 hover:drop-shadow-lg" src="../../favicon.svg"
+        /></RouterLink>
+      </div>
+      <div><h1 class="text-[1.6vw]">Cities with points of interests</h1></div>
       <div>
         <a href="https://styxa.ro/" target="_blank">
           <img
@@ -28,7 +38,11 @@
         <button @click="isSidebar = !isSidebar"><span class="mdi mdi-menu own-icon"></span></button>
       </div>
       <div><img src="../public/github.svg" class="w-8 hover:drop-shadow-lg" /></div>
-      <div><img class="cursor-pointer w-10" src="../../bridge.svg" /></div>
+      <div>
+        <RouterLink to="/">
+          <img class="cursor-pointer w-10" src="../../bridge.svg" />
+        </RouterLink>
+      </div>
       <div><h1>Cities & Points</h1></div>
       <div>
         <a href="https://styxa.ro/" target="_blank">
@@ -80,7 +94,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <img class="cursor-pointer w-6/12" src="../../coffee.svg" />
+        <img class="w-6/12" src="../../coffee.svg" />
       </div>
     </div>
 
@@ -88,6 +102,8 @@
       <RouterView />
     </div>
   </div>
+
+  <GitModal :isOpen="isGitModalOpen" @close="closeGitModal" />
 </template>
 
 <script setup lang="ts">
@@ -95,6 +111,7 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import router from './router'
+import GitModal from './components/GitModal.vue'
 
 const plans = [
   {
@@ -125,6 +142,14 @@ watch(router.currentRoute, () => {
 
 const showHeaderPosition = ref(100)
 const isShowStickyHeader = ref(false)
+const isGitModalOpen = ref(false)
+
+function openGitModal() {
+  isGitModalOpen.value = true
+}
+function closeGitModal() {
+  isGitModalOpen.value = false
+}
 
 function onScroll() {
   const scrollPosition = window.scrollY
@@ -135,7 +160,7 @@ function onScroll() {
   }
 }
 
-const isSidebar = ref(true)
+const isSidebar = ref(false)
 
 const valueForMargin = computed(() => {
   return isSidebar.value ? '300px' : '60'

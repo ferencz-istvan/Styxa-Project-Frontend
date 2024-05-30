@@ -149,6 +149,8 @@ function verifyData() {
   if (!objectForEmit) return
   if (objectForEmit.name === '') {
     window.alert('The name input field cannot be empty')
+  } else if (props.typeString === 'POI' && selectedIdForCity.value === 0) {
+    window.alert('The location have to be selected!')
   } else {
     sendData()
   }

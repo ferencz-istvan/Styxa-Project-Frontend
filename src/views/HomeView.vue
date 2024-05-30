@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+/* import { ref } from 'vue' */
 
-const srcVarNew = ref('../public/github.svg')
+/* const srcVarNew = ref('../public/github.svg')
 const embedVal = ref(
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11071.353396173032!2d25.592018366704178!3d46.07426433744442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474b4a9995ca52bf%3A0x39ff071f5dc9ee5c!2s525100%20Bar%C3%B3t!5e0!3m2!1shu!2sro!4v1716968888645!5m2!1shu!2sro'
-)
+) */
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const embedVal = ref(
       referrerpolicy="no-referrer-when-downgrade"
     ></iframe> -->
     <!-- <img :src="srcVarNew" class="cursor-pointer w-3/12" /> -->
-    <div class="flex justify-center items-center h-screen">
+    <div class="flex justify-center items-center h-screen p-24">
       <h1 class="text-[8vh]">City attractions for tourists</h1>
       <RouterLink to="/points">
         <img
@@ -37,6 +37,15 @@ const embedVal = ref(
         <img src="../../school.svg" width="350" class="hover:drop-shadow-2xl" />
       </RouterLink>
       <h1 class="text-[7vh] text-white ml-9">Find your favorite place in your favorite city!</h1>
+    </div>
+    <div class="m-5 p-24 flex justify-center items-center h-screen">
+      <img src="../../tover.svg" width="250" class="drop-shadow-2xl" />
+      <div class="flex flex-col">
+        <h1 class="text-[4vh] ml-9 p-5">The site works with vue3 and express js.</h1>
+        <a href="https://www.svgrepo.com/" target="_blank"
+          ><h1 class="text-[4vh] ml-9 p-5">Icons courtesy of SVGrepo.</h1></a
+        >
+      </div>
     </div>
 
     <div></div>

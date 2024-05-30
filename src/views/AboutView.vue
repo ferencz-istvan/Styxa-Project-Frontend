@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-justify bg-white m-x-9 mt-7 mb-16 p-[8%] w-10/12 leading-normal shadow-2xl shadow-stone-950"
+    class="text-justify bg-white m-x-9 mt-7 mb-16 p-[8%] w-10/12 max-w-4xl leading-normal shadow-2xl shadow-stone-950"
   >
     <h1 class="text-lg">About me:</h1>
     <p class="m-5">
@@ -61,7 +61,11 @@
       Thank you for visiting my website and taking the time to learn about my journey. If you're
       interested in collaborating or simply want to connect, feel free to reach out!
     </p>
-    <img class="cursor-pointer w-44 p-5" src="../../table.svg" />
+    <div class="flex items-end">
+      <img class="w-44 px-5 pt-5" src="../../home.svg" />
+      <img class="w-24 px-5 pt-5" src="../../traffic.svg" />
+    </div>
+    <hr class="h-1 bg-gray-700" />
   </div>
 </template>
 <script setup></script>

@@ -7,23 +7,18 @@
           class="flex flex-row align-center text-base font-semibold leading-6 text-gray-900 p-4"
         >
           <h1 class="mr-6">Cities</h1>
-          <img
-            class="my-[-5px] cursor-pointer w-10 hover:drop-shadow-lg"
-            src="../../building.svg"
-          />
+          <img class="my-[-5px] w-10" src="../../building.svg" />
         </div>
         <div
           v-else
           class="flex flex-row align-center text-base font-semibold leading-6 text-gray-900 p-4"
         >
           <h1 class="mr-6">Points of interests</h1>
-          <img
-            class="my-[-5px] cursor-pointer w-10 hover:drop-shadow-lg"
-            src="../../city-pointer.svg"
-          />
+          <img class="my-[-5px] w-10" src="../../city-pointer.svg" />
         </div>
       </div>
-      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <!-- old class for base button "mt-4 sm:ml-16 sm:mt-0 sm:flex-none" -->
+      <div class="flex justify-end items-center">
         <BaseButton title="Add" type="primary" @onClick="addEmit" />
       </div>
     </div>
