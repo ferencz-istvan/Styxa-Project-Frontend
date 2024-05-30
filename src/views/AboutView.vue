@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-justify bg-white m-x-9 mb-16 p-24 w-10/12 leading-normal shadow-2xl shadow-stone-950"
+    class="text-justify bg-white m-x-9 mt-7 mb-16 p-[8%] w-10/12 leading-normal shadow-2xl shadow-stone-950"
   >
     <h1 class="text-lg">About me:</h1>
     <p class="m-5">

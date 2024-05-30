@@ -14,17 +14,27 @@
       <div><img class="cursor-pointer w-10 hover:drop-shadow-lg" src="../../favicon.svg" /></div>
       <div><h1>Cities with points of interests</h1></div>
       <div>
-        <img class="cursor-pointer hover:drop-shadow-xl" src="../../styxa-white.png" width="45px" />
+        <a href="https://styxa.ro/" target="_blank">
+          <img
+            class="cursor-pointer hover:drop-shadow-xl"
+            src="../../styxa-white.png"
+            width="45px"
+          />
+        </a>
       </div>
     </div>
     <div v-if="isShowStickyHeader" class="sticky-header">
       <div>
         <button @click="isSidebar = !isSidebar"><span class="mdi mdi-menu own-icon"></span></button>
       </div>
-      <div><span class="mdi mdi-database-arrow-down own-icon"></span></div>
+      <div><img src="../public/github.svg" class="w-8 hover:drop-shadow-lg" /></div>
       <div><img class="cursor-pointer w-10" src="../../bridge.svg" /></div>
       <div><h1>Cities & Points</h1></div>
-      <div><img class="cursor-pointer" src="../../styxa-blue.png" width="55px" /></div>
+      <div>
+        <a href="https://styxa.ro/" target="_blank">
+          <img class="cursor-pointer" src="../../styxa-blue.png" width="55px" />
+        </a>
+      </div>
     </div>
 
     <div v-if="isSidebar" class="sidebar">
@@ -149,10 +159,6 @@ onUnmounted(() => {
   min-height: 100vh;
   background-color: Lavender;
 }
-/*.container {
-  display: flex;
-
-}*/
 .normal-header {
   display: grid;
   grid-template-columns: 60px 60px 60px 1fr 180px;
@@ -197,7 +203,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 5vw;
+  /*padding: 20px 5vw;*/
   margin-left: v-bind(valueForMargin);
 }
 .sidebar {
@@ -260,6 +266,8 @@ onUnmounted(() => {
   .sidebar {
     width: 100%;
     height: 100%;
+    z-index: 100;
+    opacity: 1;
   }
 }
 </style>

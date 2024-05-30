@@ -1,16 +1,27 @@
 <template>
-  <div class="px-4 sm:px-6 lg:px-8">
-    <div id="table-header" class="sm:flex sm:items-center">
+  <div class="my-9 px-4 sm:px-4 lg:px-8">
+    <div id="table-header" class="md:flex md:items-center">
       <div class="sm:flex-auto">
-        <h1
+        <div
           v-if="props.headerList.length <= 2"
-          class="text-base font-semibold leading-6 text-gray-900 p-4"
+          class="flex flex-row align-center text-base font-semibold leading-6 text-gray-900 p-4"
         >
-          Cities
-        </h1>
-        <h1 v-else class="text-base font-semibold leading-6 text-gray-900 p-4">
-          Points of interests
-        </h1>
+          <h1 class="mr-6">Cities</h1>
+          <img
+            class="my-[-5px] cursor-pointer w-10 hover:drop-shadow-lg"
+            src="../../building.svg"
+          />
+        </div>
+        <div
+          v-else
+          class="flex flex-row align-center text-base font-semibold leading-6 text-gray-900 p-4"
+        >
+          <h1 class="mr-6">Points of interests</h1>
+          <img
+            class="my-[-5px] cursor-pointer w-10 hover:drop-shadow-lg"
+            src="../../city-pointer.svg"
+          />
+        </div>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
         <BaseButton title="Add" type="primary" @onClick="addEmit" />
@@ -48,7 +59,7 @@
                   <td
                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                   >
-                    <div v-if="props.headerList.length > 2">
+                    <div v-if="props.headerList.length < 3">
                       <RouterLink
                         :to="{
                           name: 'details',
@@ -62,7 +73,9 @@
                     </div>
                     <div v-else>{{ item.name }}</div>
                   </td>
-                  <td class="max-w-md truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <td
+                    class="max-w-sm w-3/12 truncate whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                  >
                     {{ item.description }}
                   </td>
                   <td
